@@ -3,9 +3,8 @@ project(needle C CXX)
 cmake_policy(SET CMP0146 OLD)
 
 # find correct version of Python
-execute_process(COMMAND python3-config --prefix
-  OUTPUT_VARIABLE Python_ROOT_DIR)
-find_package(Python COMPONENTS Development Interpreter REQUIRED)
+set(Python_EXECUTABLE "/home/pitayaya/uv_project/example/test-V11/bin/python")
+find_package(Python 3.11 REQUIRED COMPONENTS Development Interpreter)
 include_directories(${Python_INCLUDE_DIRS})
 
 # find pybind
@@ -17,11 +16,11 @@ find_package(pybind11 PATHS ${__pybind_path})
 
 
 if(NOT MSVC)
-  set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -march=native ${CMAKE_CXX_FLAGS}")
-  set(CMAKE_CUDA_STANDARD 14)
+  set(CMAKE_CXX_FLAGS "-std=c++17 -O2 -march=native ${CMAKE_CXX_FLAGS}")
+  set(CMAKE_CUDA_STANDARD 17)
 else()
-  set(CMAKE_CXX_FLAGS "/std:c++11 -O2 -march=native ${CMAKE_CXX_FLAGS}")
-  set(CMAKE_CUDA_STANDARD 14)
+  set(CMAKE_CXX_FLAGS "/std:c++17 -O2 -march=native ${CMAKE_CXX_FLAGS}")
+  set(CMAKE_CUDA_STANDARD 17)
 endif()
 
 include_directories(SYSTEM ${pybind11_INCLUDE_DIRS})
